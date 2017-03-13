@@ -23,7 +23,7 @@ public class MovieResource {
 		return mService.findAll();
 		
 	}
-	
+	@Path("{term}")
 	@GET
 	public Set<Movie> getMoviesByName(@PathParam("term") String term){
 		MovieService mService = new MovieService();
