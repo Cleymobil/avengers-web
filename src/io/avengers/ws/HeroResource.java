@@ -14,8 +14,7 @@ import io.avengers.service.HeroService;
 @Path("heroes")
 @Produces(MediaType.APPLICATION_JSON)
 public class HeroResource {
-	
-	
+
 	@GET
 	public Set<Hero> getAllHeroes() {
 		HeroService hservice = new HeroService();
@@ -25,9 +24,12 @@ public class HeroResource {
 
 	@GET
 	@Path("{id}")
-	public Hero findHerobyId(@PathParam("id") int id){
+	public Hero findHerobyId(@PathParam("id") int id) {
 		Hero hero = new HeroService().findHeroesById(id);
 		return hero;
 	}
-	
+	/*
+	 * @Path("{name}") public Hero findHerobyName(@PathParam("name") String name){
+	 * Hero hero = new HeroService().findHeroesById(id); return hero; }
+	 */
 }
