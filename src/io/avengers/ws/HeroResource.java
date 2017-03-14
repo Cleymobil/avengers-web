@@ -29,7 +29,8 @@ public class HeroResource {
 		return hero;
 	}
 	/*
-	 * @Path("{name}") public Hero findHerobyName(@PathParam("name") String name){
-	 * Hero hero = new HeroService().findHeroesById(id); return hero; }
+	 * @Path("{name}") public Set<Hero> findHerobyName(@PathParam("name") String
+	 * name) { Set<Hero> hero = new HeroService().findHeroesByName(name); return
+	 * hero; }
 	 */
 }
