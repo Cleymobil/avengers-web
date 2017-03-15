@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -37,8 +38,7 @@ public class MovieResource {
 		return mService.findMoviesByName(term);
 
 	}
-	
-	
+
 	@POST
 	public Response createNewMovie(Movie newMovie) throws SQLException {
 		System.out.println(newMovie);
@@ -53,16 +53,33 @@ public class MovieResource {
 
 	@Path("{movieId}/{heroId}")
 	@POST
-	public Response addHeroToMovie(@PathParam("movieId") int movieId, @PathParam("heroId") int heroId ){
-		System.out.println("movie id is: "+movieId+" and hero id is: "+heroId);
+	public Response addHeroToMovie(@PathParam("movieId") int movieId, @PathParam("heroId") int heroId) {
+		System.out.println("movie id is: " + movieId + " and hero id is: " + heroId);
 		HeroService heroService = new HeroService();
 		MovieService movieService = new MovieService();
-		if (movieId <= 0 || heroId <= 0){
+		if (movieId <= 0 || heroId <= 0) {
 			return Response.status(406).entity("\"empty id\"").build();
 		}
 		String heroName = heroService.findHeroesById(heroId).getName();
 		String movieName = movieService.findMovieById(movieId).getName();
 		movieService.putHeroInMovie(heroId, movieId);
-		return Response.status(201).entity("\"" + heroName +" "+ movieName +"\"").build();
+		return Response.status(201).entity("\"" + heroName + " " + movieName + "\"").build();
 	}
+
+	@Path("{movieId}")
+	@DELETE
+	public Response deleteMovie(@PathParam("movieId") int movieId) {
+		MovieService movieService = new MovieService();
+		String movieName = movieService.findMovieById(movieId).getName();
+
+		System.out.println("Deleting " + movieName + " whom id is: " + movieId);
+
+		if (movieId <= 0) {
+			return Response.status(406).entity("\"empty id\"").build();
+		}
+
+		movieService.deleteMovie(movieId);
+		return Response.status(201).entity("\"" + movieName + " has been deleted" + "\"").build();
+	}
+
 }
