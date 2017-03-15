@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.avengers.domain.Hero;
 import io.avengers.domain.Team;
 import io.avengers.service.TeamService;
 
@@ -32,6 +33,15 @@ public class TeamResource {
 		TeamService tservice = new TeamService();
 		return tservice.findTeamById(id);
 	}
+	
+	@GET
+	@Path("{id}/heroes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Set<Hero> findHeroesByTeam(@PathParam("id") int id) {
+		TeamService tservice = new TeamService();
+		return tservice.findTeamHeroes(id);
+	}
+	
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
