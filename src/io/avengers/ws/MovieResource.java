@@ -12,8 +12,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.avengers.dao.HeroDao;
 import io.avengers.dao.MovieDao;
 import io.avengers.domain.Movie;
+import io.avengers.service.HeroService;
 import io.avengers.service.MovieService;
 
 @Path("movies")
@@ -36,6 +38,7 @@ public class MovieResource {
 
 	}
 	
+	
 	@POST
 	public Response createNewMovie(Movie newMovie) throws SQLException {
 		System.out.println(newMovie);
@@ -48,4 +51,18 @@ public class MovieResource {
 		return Response.status(201).entity("\"" + newMovie.getId() + "\"").build();
 	}
 
+	@Path("{movieId}/{heroId}")
+	@POST
+	public Response addHeroToMovie(@PathParam("movieId") int movieId, @PathParam("heroId") int heroId ){
+		System.out.println("movie id is: "+movieId+" and hero id is: "+heroId);
+		HeroService heroService = new HeroService();
+		MovieService movieService = new MovieService();
+		if (movieId <= 0 || heroId <= 0){
+			return Response.status(406).entity("\"empty id\"").build();
+		}
+		String heroName = heroService.findHeroesById(heroId).getName();
+		String movieName = movieService.findMovieById(movieId).getName();
+		movieService.putHeroInMovie(heroId, movieId);
+		return Response.status(201).entity("\"" + heroName +" "+ movieName +"\"").build();
+	}
 }
