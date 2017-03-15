@@ -10,9 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import io.avengers.domain.Hero;
-import io.avengers.domain.Sex;
 import io.avengers.service.HeroService;
 
 @Path("heroes")
@@ -41,10 +39,8 @@ public class HeroResource {
 		if (hero.getName().isEmpty()) {
 			return Response.status(406).entity("\"Empty comment\"").build();
 		}
-		heroService.createHero(hero.getName(), hero.getIrl(), hero.getLikes(), hero.getDislikes(), hero.getAbilities(),
-				hero.getHistory());
+		heroService.createHero(hero);
 		return Response.status(201).entity("\"" + heroService.findAll() + "\"").build();
-
 	}
 
 }
