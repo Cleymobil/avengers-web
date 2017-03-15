@@ -79,7 +79,25 @@ public class MovieResource {
 		}
 
 		movieService.deleteMovie(movieId);
-		return Response.status(201).entity("\"" + movieName + " has been deleted" + "\"").build();
+		return Response.status(204).header("X-deleted","\"" + movieName + " has been deleted" + "\"" ).build();
+	}
+	
+	@Path("{movieId}/{heroId}")
+	@DELETE
+	public Response deleteMovie(@PathParam("movieId") int movieId, @PathParam("heroId") int heroId) {
+		MovieService movieService = new MovieService();
+		HeroService heroService = new HeroService();
+		String movieName = movieService.findMovieById(movieId).getName();
+		String heroName = heroService.findHeroesById(heroId).getName();
+		
+		System.out.println("Deleting " + heroName + " in: " + movieName);
+
+		if (movieId <= 0 || heroId <= 0) {
+			return Response.status(406).entity("\"empty id\"").build();
+		}
+
+		movieService.deleteHeroInMovie(movieId, heroId);
+		return Response.status(204).header("X-deleted","\"" + heroName + " has been deleted from " +movieName+ "\"").build();
 	}
 
 }
