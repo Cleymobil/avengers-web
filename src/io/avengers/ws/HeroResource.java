@@ -41,7 +41,7 @@ public class HeroResource {
 		if (hero.getName().isEmpty()) {
 			return Response.status(406).entity("\"Empty comment\"").build();
 		}
-		heroService.createHero(hero.getName(), hero.getLikes(), hero.getDislikes(), hero.getAbilities(),
+		heroService.createHero(hero.getName(), hero.getIrl(), hero.getLikes(), hero.getDislikes(), hero.getAbilities(),
 				hero.getHistory());
 		return Response.status(201).entity("\"" + heroService.findAll() + "\"").build();
 
