@@ -16,9 +16,6 @@ function fetchHeroes() {
 	return fetch('marvel/heroes').then(response => response.json());
 }
 
-
-
-
 function displayHeroes(heroes) {
 	const ul = document.createElement('ul');
 	document.body.appendChild(ul);
@@ -56,6 +53,15 @@ function deleteHero(id) {
 	//replay
 	displayHeroes(globalHeroes);
 }
+
+function createHero(hero){
+	//document.querySelector("input[name=likes]").value 
+	//document.querySelector("input[name=dislikes]").value 
+	//document.querySelector("input[name=name]").value 
+	//document.querySelector("input[name=team]").value 
+}
+
+
 //GO!
 application();
 
