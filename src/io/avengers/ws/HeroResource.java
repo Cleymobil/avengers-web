@@ -56,4 +56,16 @@ public class HeroResource {
 			return Response.noContent().header("X-message", "Delete" + hero.getName()).build();
 		}
 	}
+	@DELETE
+	@Path("{id}/team")
+	public Response removeTeamFromHero(@PathParam("id") int id) {
+		Hero hero = new HeroService().findHeroesById(id);
+		System.out.println(hero);
+		if (hero == null) {
+			return Response.status(404).build();
+		} else {
+			new HeroService().removeTeamFromHero(hero);
+			return Response.noContent().header("X-message", "Delete" + hero.getTeam()).build();
+		}
+	}
 }
