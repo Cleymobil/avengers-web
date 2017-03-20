@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Marvel Heroes</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<header>
+
+		<center><img src="../marvelheroes.png" alt="all Marvel" /></center>
+	</header>
+<h1>Heroes</h1>
+
+<h2>Creer un heroe</h2>
+<form action="create-hero.html" method="post">
+
+		<label>Hero name :
+			<input type="text" placeholder="Hero Name" name="name" required="required">
+			</label> Likes <input type="number"
+		 placeholder="Likes" name="likes" required="required"><br/> Dislikes <input type="number" placeholder="Dislikes" name="dislikes"><br/>
+
+
+		<fieldset>
+			<legend>
+				Liens sociaux
+			</legend>
+			<label>Team : 
+				<select name="team">
+					<option selected="selected" value="false">None</option>
+					<option value="1">Avengers</option>
+					<option value="2">X-men</option>
+
+				</select>
+				</label>
+			<br/>
+		</fieldset>
+
+		<button type="reset">Reset Form</button>
+		<button type="submit">Create new Hero</button>
+
+
+	</form>
+</body>
+	<footer>Information toke from <a href="http://marvel.com/comics">Marvel</footer>
+
+<script type="text/javascript" src="js/heroes.js"></script>
+</html>
