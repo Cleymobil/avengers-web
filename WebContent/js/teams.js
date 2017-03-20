@@ -69,8 +69,12 @@ TeamListComponent.prototype = {
 				body: JSON.stringify(newTeam)
 			})
 			.then(json => {
+				$('div.component').remove();
+				this.fetchAll();
 				this.collection.push(newTeamItem);
-				this.$el.find('ul').append(newTeamItem.render())
+				this.render();
+				//this.collection.push(newTeamItem);
+				//this.$el.find('ul').append(newTeamItem.render())
 			})
 
 
