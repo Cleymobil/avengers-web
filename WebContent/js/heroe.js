@@ -31,21 +31,24 @@ HeroListComponent.prototype = {
     },
     createHero() {
 
-        const hero = {
+        const newHero = {
             name: $('input[name=name]').val(),
             likes: parseInt($('input[name=likes]').val()),
             dislikes: parseInt($('input[name=dislikes]').val()),
             team: $('input[name=team]').val()
         }
-
-        console.log(hero);
+        const newHeroItem = new HeroItem (newHero , this);
+       
         fetch('marvel/heroes/', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify(hero)
+            body: JSON.stringify(newHero)
+        }).then(json => {
+        	this.collection.push(newHeroItem);
+        	this.$el.find('ul').append(newHeroItem.render())
         })
 
     }
