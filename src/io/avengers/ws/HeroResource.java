@@ -55,6 +55,7 @@ public class HeroResource {
 			return Response.noContent().header("X-message", "Delete" + hero.getName()).build();
 		}
 	}
+
 	@DELETE
 	@Path("{id}/team")
 	public Response removeTeamFromHero(@PathParam("id") int id) {

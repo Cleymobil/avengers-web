@@ -8,12 +8,14 @@
 <body>
 <header>
 
-		<center><img src="../marvelheroes.png" alt="all Marvel" /></center>
+<!-- 		<center><img src="../marvelheroes.png" alt="all Marvel" /></center> -->
 	</header>
 <h1>Heroes</h1>
 
 <h2>Creer un heroe</h2>
-<form action="create-hero.html" method="post">
+
+
+<form>
 
 		<label>Hero name :
 			<input type="text" placeholder="Hero Name" name="name" required="required">
@@ -37,12 +39,30 @@
 		</fieldset>
 
 		<button type="reset">Reset Form</button>
-		<button type="submit">Create new Hero</button>
+		<button type="button" class="create">Create new Hero</button>
 
 
 	</form>
+	<div class="heroList">
+	</div>
 </body>
 	<footer>Information toke from <a href="http://marvel.com/comics">Marvel</footer>
 
-<script type="text/javascript" src="js/heroes.js"></script>
+
+<script
+ src="https://code.jquery.com/jquery-3.2.0.min.js"
+ integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
+ crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script> 
+<script type="text/javascript" src="js/heroe.js"></script>
+<script type="text/javascript" src="heroApplication.js"></script>
+
+
+
+
+
+
+
+
+
 </html>
