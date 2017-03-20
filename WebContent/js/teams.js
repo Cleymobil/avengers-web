@@ -10,7 +10,7 @@ function application() {
 }
 
 function TeamListComponent() {
-
+	$('button.create').on('click', event => this.createTeam());
 
 }
 
@@ -48,12 +48,38 @@ TeamListComponent.prototype = {
 		return this.$el;
 
 
+	},
+
+	createTeam() {
+
+		newTeam = {
+			name: $('input[name=name]').val(),
+			history: $('input[name=history]').val()
+		}
+		const newTeamItem = new TeamItem(newTeam, this)
+
+
+		fetch('marvel/teams',
+			{
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				method: "POST",
+				body: JSON.stringify(newTeam)
+			})
+			.then(json => {
+				this.collection.push(newTeamItem);
+				this.$el.find('ul').append(newTeamItem.render())
+			})
+
+
 	}
 
 
 }
 
-function TeamItem(data,listComponent) {
+function TeamItem(data, listComponent) {
 	Object.assign(this, data);
 	this.listComponent = listComponent;
 	this.collection = listComponent.collection;
