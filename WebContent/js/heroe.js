@@ -1,5 +1,6 @@
 function HeroListComponent() {
-    $('button.create').on('click', event => this.createHero());
+    $('button.create').on('click', event => this.createHero())
+
 }
 HeroListComponent.prototype = {
     fetchAll: function() {
@@ -37,8 +38,8 @@ HeroListComponent.prototype = {
             dislikes: parseInt($('input[name=dislikes]').val()),
             team: $('input[name=team]').val()
         }
-        const newHeroItem = new HeroItem (newHero , this);
-       
+        const newHeroItem = new HeroItem(newHero, this);
+
         fetch('marvel/heroes/', {
             headers: {
                 'Accept': 'application/json',
@@ -47,13 +48,11 @@ HeroListComponent.prototype = {
             method: "POST",
             body: JSON.stringify(newHero)
         }).then(json => {
-        	this.collection.push(newHeroItem);
-        	this.$el.find('ul').append(newHeroItem.render())
+            this.collection.push(newHeroItem);
+            this.$el.find('ul').append(newHeroItem.render())
         })
-
     }
 }
-
 
 function HeroItem(data, listComponent) {
     Object.assign(this, data);
