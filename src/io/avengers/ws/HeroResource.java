@@ -39,7 +39,7 @@ public class HeroResource {
 		if (hero.getName().isEmpty()) {
 			return null;
 		}
-		
+	
 		return new HeroService().createHero(hero);
 	}
 

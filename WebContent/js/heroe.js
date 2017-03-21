@@ -59,7 +59,7 @@ HeroListComponent.prototype = {
     add: function(newHero) {
         console.log(newHero.id);
         this.collection.push(newHero);
-        this.$el.append(newHero.render());
+        this.$el.find('ul').append(newHero.render());
         console.log(this.$el);
         return this.collection;
     }
@@ -84,7 +84,9 @@ HeroItem.prototype = {
     },
 
     remove() {
-        fetch('marvel/heroes/' + this.id, { method: 'delete' })
+        fetch('marvel/heroes/' + this.id, {
+                method: 'delete'
+            })
             .catch(error => heroApplication());
         //new state
         component.collection = component.collection.filter(h => h.id !== this.id);
