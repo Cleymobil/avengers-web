@@ -1,60 +1,82 @@
-//STATE of my application
-let allMovies = [];
+function MovieListComponent() {
+    $('button.createMovie').on('click', event => this.createMovie());
+}
+MovieListComponent.prototype = {
+    fetchAll: function() {
+        return $.get('marvel/movies')
+            .then(json => {
+                this.collection = [];
+                json.forEach(data => {
+                    const movie = new MovieItem(data, this);
+                    this.collection.push(movie);
+                });
+                return this.collection;
+            });
+    },
+    render: function() {
+        const template = `<div class = component>
+			<h1>Movie List</h1> 
+				<ul>
+				</ul>
+				<footer> Some html footer</footer>
+			</div>`;
+        //cached component jQueryified element
+        this.$el = $(template);
+        console.log(this.$el);
+        //All is done in Memory
+        this.collection.forEach(movie => this.$el.find('ul').append(movie.render()));
+        //More efficient, if we put in the DOM later
+        $('div.movieList').append(this.$el);
+        return this.$el;
+    },
+    createMovie() {
 
-function application(){
-	fetchMovies().then(function(movies){
-		console.log('found movies', movies);
-		
-        //changed the state
-		allMovies = movies;
-        
-        displayMovies(movies);
-	});
+        const movie = {
+            name: $('input[name=movieName]').val(),
+            gross: parseInt($('input[name=gross]').val()),
+            budget: parseInt($('input[name=budget]').val()),
+        }
+        const newMovieItem = new MovieItem(newMovie, this);
+        console.log(movie);
+        fetch('marvel/movies/', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(movie)
+        })//.then(json => {
+        	//this.collection.push(newMovieItem);
+        	//this.$el.find('ul').append(newMovieItem.render())
+       // })
+
+    }
 }
 
-function fetchMovies(){
-	console.log(' fetching movies')
-	return fetch('marvel/movies').then(resp => resp.json());
+
+function MovieItem(data, listComponent) {
+    Object.assign(this, data);
+    this.listComponent = listComponent;
+    this.collection = listComponent.collection;
 }
 
-function displayMovies(movies){
-	const ul = document.createElement('ul');
-	document.getElementsByClassName("display").appendChild(ul);
-    movies.forEach(movie =>displayMovie(movie));
+MovieItem.prototype = {
+    render() {
+
+        const template = `<li>${this.name}<button>Delete ${this.name}</button></li>`;
+        //Element jQueryfied
+        this.$el = $(template);
+        const li = $('<li>');
+        //Catch the button without reading all DOM with find()
+        const button = this.$el.find('button').on('click', event => this.remove());
+        return this.$el;
+    },
+
+    remove() {
+        fetch('marvel/movies/' + this.id, { method: 'delete' })
+            .catch(error => movieApplication());
+        //new state
+        component.collection = component.collection.filter(h => h.id !== this.id);
+        this.$el.remove();
+    }
 }
-
-function displayMovie(movie){
-	console.log('movie', movie.name);
-    
-    //SEARCH ul
-    const ul =document.querySelector('ul');
-
-    // CREATE <li></li>
-    const li = document.createElement('li');
-	const text = document.createTextNode(movie.name);
-	li.appendChild(text);
-    ul.appendChild(li);
-
-    //CREATE button
-    const button = document.createElement('button');
-    button.appendChild(document.createTextNode('delete '+movie.name));
-    li.appendChild(button);
-
-    button.addEventListener('click',function(event){
-        console.log('event: ', event);
-        removeMovie(movie);
-    });
-}
-
-function removeMovie(movie){
-    fetch('api/movies/'+movie.id, {method:'delete'})
-        .catch(error => application() );
-    //new state
-    allMovies = allMovies.filter(u => movie.id !== u.id);
-    // remove ul
-    document.body.removeChild(document.querySelector('ul'));
-    //replay
-    displayMovies(allMovies);
-}
-
-application();
