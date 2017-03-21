@@ -96,22 +96,22 @@ HeroItem.prototype = {
         //Catch the button without reading all DOM with find()
         const button = this.$el.find('button').on('click', event => this.remove());
         const button2 = this.$el.find('button.view').on('click', event => this.viewHero());
-		
+
         return this.$el;
     },
-    
-    viewHero: function () {
-		return $.get('marvel/heroes/' + this.id)
 
-			.then(Response => {
-				$('div.component').remove();
-				const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
-				this.$el = $(template);
-				$('body').append(this.$el);
-				//this.viewHeroes();
+    viewHero: function() {
+        return $.get('marvel/heroes/' + this.id)
 
-			})
-	},
+        .then(Response => {
+            $('div.component').remove();
+            const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
+            this.$el = $(template);
+            $('body').append(this.$el);
+            //this.viewHeroes();
+
+        })
+    },
 
     remove() {
         fetch('marvel/heroes/' + this.id, {
@@ -123,7 +123,7 @@ HeroItem.prototype = {
         this.$el.remove();
     },
     renderCheck() {
-        const template = `<li><input class="checkboxHero" type= "checkbox" name = ${this.name}>${this.name}</li>`;
+        const template = `<li><input class="checkboxHero" type= "checkbox" name = ${this.id}>${this.name}</li>`;
         //Element jQueryfied
         this.$el = $(template);
         const li = $('<li>');

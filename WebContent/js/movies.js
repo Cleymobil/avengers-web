@@ -31,14 +31,13 @@ MovieListComponent.prototype = {
         return this.$el;
     },
     renderList: function() {
-        const template = `<select name="movieSelectName" class="movieSelect">
-
-       </select>`;
+        const template = `<p><select name="movieSelectName" id="movieSelect">
+       </select><p/>`;
         //cached component jQueryified element
         this.$el = $(template);
         console.log(this.$el);
         //All is done in Memory
-        this.collection.forEach(movie => this.$el.find('.movieSelect').append(movie.renderInList()));
+        this.collection.forEach(movie => this.$el.find('#movieSelect').append(movie.renderInList()));
         //More efficient, if we put in the DOM later
         $('#movieSelectId').append(this.$el);
         return this.$el;
@@ -131,5 +130,13 @@ MovieItem.prototype = {
         //new state
         component.collection = component.collection.filter(h => h.id !== this.id);
         this.$el.remove();
+    },
+    addHeroInMovie() {
+        const heroes_id = [];
+        $('input.check:checked').each(function() {
+            heroes_id.push($(this).name());
+        });
+        const movie_name = $("#movieSelect").val().id;
+
     }
 }
