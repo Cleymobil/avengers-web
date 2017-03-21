@@ -39,18 +39,29 @@ HeroListComponent.prototype = {
             team: $('input[name=team]').val()
         }
         const newHeroItem = new HeroItem(newHero, this);
-
-        fetch('marvel/heroes/', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify(newHero)
-        }).then(json => {
-            this.collection.push(newHeroItem);
-            this.$el.find('ul').append(newHeroItem.render())
-        })
+        const me = this;
+        fetch('marvel/heroes', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(newHero)
+            })
+            .then(response => {
+                response.json().then(json => {
+                    console.log(json);
+                    const character = new HeroItem(json, me);
+                    me.add(character);
+                })
+            });
+    },
+    add: function(newHero) {
+        console.log(newHero.id);
+        this.collection.push(newHero);
+        this.$el.append(newHero.render());
+        console.log(this.$el);
+        return this.collection;
     }
 }
 

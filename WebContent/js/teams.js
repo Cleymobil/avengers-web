@@ -26,7 +26,9 @@ TeamListComponent.prototype = {
 				json.forEach(data => {
 					const team = new TeamItem(data, this)
 					this.collection.push(team)
+				
 				})
+
 				return this.collection;
 			});
 
@@ -68,9 +70,11 @@ TeamListComponent.prototype = {
 				method: "POST",
 				body: JSON.stringify(newTeam)
 			})
-			.then(json => {
-				this.collection.push(newTeamItem);
-				this.$el.find('ul').append(newTeamItem.render())
+			.then(Response => {
+				$('div.component').remove();
+				return this.fetchAll()})
+			.then(Response=>{
+				this.render();
 			})
 
 
@@ -100,6 +104,7 @@ TeamItem.prototype = {
 	},
 
 	remove: function () {
+		console.log("removing "+this.name+" "+"id: "+this.id)
 		fetch('marvel/teams/' + this.id, { method: 'delete' })
 			.catch(error => application());
 		//new state
