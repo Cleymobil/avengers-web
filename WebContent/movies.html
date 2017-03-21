@@ -14,32 +14,51 @@
     </header>
     <form>
         <h2>Create a new Movie with only its name, gross and budget</h2>
-        <br/> 
-        name: <input type="text" name="movieName" placeholder="Name" required="required"><br/> 
-        gross: <input type="text" name="gross" placeholder="gross" required="required"><br/> 
-        budget: <input type="text" name="budget" placeholder="budget" required="required"><br/>
-        <button type="button" class="createMovie"> submit</button>
-        <button type="reset">Reset Form</button>
+        <ul>
+            <li> name: <input type="text" name="movieName" placeholder="Name" required="required"></li>
+            <li> gross: <input type="text" name="gross" placeholder="gross" required="required"></li>
+            <li> budget: <input type="text" name="budget" placeholder="budget" required="required"></li>
+            <button type="button" class="createMovie"> submit</button>
+            <button type="reset">Clear Form</button>
     </form>
     <br/><br/><br/><br/>
-     <form id="form2">
-        <h2>Create a new Movie with all its parameters</h2>
-        <br/><br/> name: <input type="text" name="movieName" placeholder="Name" required="required"><br/> gross: <input type="text" name="gross" placeholder="gross" required="required"><br/> date : <input type="text" name="date" placeholder="date" required="required"><br/>        budget: <input type="text" name="budget" placeholder="budget" required="required"><br/> history: <input type="text" name="history" placeholder="history" required="required"><br/>
-        <button type="submit"> submit</button>
+    <form>
+        <h2>Add heroes to a movie</h2>
+        <form method="post" action="traitement.php">
+            <p>
+                <label for="movie">Choose a movie</label><br />
+                <select name="movieList" id="movieList">
+       </select>
+            </p>
+        </form>
+        <fieldset id="checkedHeroList">
+
+        </fieldset>
+        <button type="button" class="addHeroToMovie"> submit</button>
     </form>
+    <!--<form id="form2">
+        <h2>Create a new Movie with all its parameters</h2>
+        <ul>
+            <li>name: <input type="text" name="movieName2" placeholder="Name" required="required"></li>
+            <li> gross: <input type="text" name="gross2" placeholder="gross" required="required"></li>
+            <li>budget: <input type="text" name="budget2" placeholder="budget" required="required"></li>
+            <li> history: <input type="text" name="history2" placeholder="history" required="required"></li>
+        </ul>
+        <button type="submit" class="createMovie2"> submit</button>
+        <button type="reset">Clear Form</button>
+    </form>-->
     <div class="movieList">
     </div>
 
 
-</body>
-<script
- src="https://code.jquery.com/jquery-3.2.0.min.js"
- integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
- crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script> 
-<script type="text/javascript" src="js/movies.js"></script>
-<script type="text/javascript" src="movieApplication.js"></script>
 
+</body>
+<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+<script type="text/javascript" src="js/movies.js"></script>
+<script type="text/javascript" src="js/heroe.js"></script>
+<script type="text/javascript" src="movieApplication.js"></script>
+<!--<script type="text/javascript" src="heroApplication.js"></script>-->
 
 
 </html>

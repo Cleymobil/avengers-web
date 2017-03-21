@@ -1,5 +1,6 @@
 function MovieListComponent() {
     $('button.createMovie').on('click', event => this.createMovie());
+    $('button.createMovie2').on('click', event => this.createMovie2());
 }
 MovieListComponent.prototype = {
     fetchAll: function() {
@@ -29,14 +30,62 @@ MovieListComponent.prototype = {
         $('div.movieList').append(this.$el);
         return this.$el;
     },
+    renderList: function() {
+        const template = `<div class = component>
+			
+			</div>`;
+        //cached component jQueryified element
+        this.$el = $(template);
+        console.log(this.$el);
+        //All is done in Memory
+        this.collection.forEach(movie => this.$el.find('ul').append(movie.renderInList()));
+        //More efficient, if we put in the DOM later
+        $('#movieList').append(this.$el);
+        console.log($('#movieList'));
+        return this.$el;
+    },
     createMovie() {
 
-        const movie = {
+        let movie = {
             name: $('input[name=movieName]').val(),
             gross: parseInt($('input[name=gross]').val()),
             budget: parseInt($('input[name=budget]').val()),
         }
-        const newMovieItem = new MovieItem(movie, this);
+        let newMovieItem = new MovieItem(movie, this);
+        console.log(movie);
+        const me = this;
+        fetch('marvel/movies', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(movie)
+            })
+            .then(response => {
+                response.json().then(json => {
+                    console.log(json);
+                    const newMovie = new MovieItem(json, me);
+                    me.add(newMovie);
+                })
+            });
+    },
+    add: function(movie) {
+        console.log(movie.id);
+        this.collection.push(movie);
+        this.$el.find('ul').append(movie.render());
+        console.log(this.$el);
+        return this.collection;
+    },
+    createMovie2() {
+
+        let movie = {
+            name: $('input[name=movieName2]').val(),
+            gross: parseInt($('input[name=gross2]').val()),
+            budget: parseInt($('input[name=budget2]').val()),
+            history: $('input[name=history2]').val()
+        }
+        let newMovieItem = new MovieItem(movie, this);
         console.log(movie);
         fetch('marvel/movies/', {
             headers: {
@@ -46,10 +95,9 @@ MovieListComponent.prototype = {
             method: "POST",
             body: JSON.stringify(movie)
         }).then(json => {
-        	this.collection.push(newMovieItem);
-        	this.$el.find('ul').append(newMovieItem.render())
-        })
-;
+            this.collection.push(newMovieItem);
+            this.$el.find('ul').append(newMovieItem.render())
+        });
     }
 }
 
@@ -69,6 +117,13 @@ MovieItem.prototype = {
         const li = $('<li>');
         //Catch the button without reading all DOM with find()
         const button = this.$el.find('button').on('click', event => this.remove());
+        return this.$el;
+    },
+    renderInList() {
+
+        const template = `<option value=${this.id}>${this.name}</option>`;
+        //Element jQueryfied
+        this.$el = $(template);
         return this.$el;
     },
 
