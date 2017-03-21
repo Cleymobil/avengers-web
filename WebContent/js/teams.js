@@ -4,7 +4,8 @@ function application() {
 	component = new TeamListComponent();
 
 	component.fetchAll().then(function (teams) {
-		component.render()
+		component.render();
+		component.renderList();
 	});
 
 }
@@ -84,7 +85,20 @@ TeamListComponent.prototype = {
 			})
 
 
-	}
+	},
+	 renderList: function() {
+        const template = `<select name="teamSelectName" class="teamSelect">
+
+       </select>`;
+        //cached component jQueryified element
+        this.$el = $(template);
+        console.log(this.$el);
+        //All is done in Memory
+        this.collection.forEach(team => this.$el.find('.teamSelect').append(team.renderInList()));
+        //More efficient, if we put in the DOM later
+        $('#teamSelectId').append(this.$el);
+        return this.$el;
+    }
 
 
 }
@@ -108,6 +122,13 @@ TeamItem.prototype = {
 		return this.$el;
 
 
+	},
+
+	renderInList:function() {
+        const template = `<option value="${this.name}">${this.name}</option>`;
+        //Element jQueryfied
+        this.$el = $(template);
+        return this.$el;
 	},
 
 	remove: function () {
@@ -174,70 +195,15 @@ TeamItem.prototype = {
 				return this.$el;
 
 			});
-
-
-
 	},
-
-
-
-
 
 	home: function () {
 
 		$('div.component').remove();
 
 		this.listComponent.render();
-
-
-
 	}
 
-
-
-
-
 }
-
-
-
-/*
-
-
-function fetchTeams() {
-	console.log('fetching teams');
-	return fetch('marvel/teams').then(resp => resp.json());
-}
-
-function displayTeams(teams) {
-	const ul = document.createElement("ul");
-	document.body.appendChild(ul);
-
-	teams.forEach(team => displayTeam(team));
-}
-
-function displayTeam(team) {
-	console.log('team', team.name);
-
-	// CREATE <li></li>
-	const ul = document.querySelector('ul');
-	const li = document.createElement("li");
-	const text = document.createTextNode(team.name);
-	li.appendChild(text);
-	ul.appendChild(li);
-
-	//ADD Button
-	const button = document.createElement("button");
-	button.appendChild(document.createTextNode('Delete ' + team.name));
-	li.appendChild(button);
-
-	//button.addEventListener('click', function (event) {
-		//removeUser(user.id);
-
-//	});
-
-
-}
-*/
 
 application();
