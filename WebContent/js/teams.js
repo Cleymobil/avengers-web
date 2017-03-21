@@ -26,8 +26,9 @@ TeamListComponent.prototype = {
 				json.forEach(data => {
 					const team = new TeamItem(data, this)
 					this.collection.push(team)
-					console.log(team.name +" : " +team.id)
+				
 				})
+
 				return this.collection;
 			});
 
@@ -69,16 +70,11 @@ TeamListComponent.prototype = {
 				method: "POST",
 				body: JSON.stringify(newTeam)
 			})
-			.then(json => {
+			.then(Response => {
 				$('div.component').remove();
-				//console.log("new fetchall :");
-				this.fetchAll();
-
-				this.collection.push(newTeamItem);
+				return this.fetchAll()})
+			.then(Response=>{
 				this.render();
-
-				//this.collection.push(newTeamItem);
-				//this.$el.find('ul').append(newTeamItem.render())
 			})
 
 
