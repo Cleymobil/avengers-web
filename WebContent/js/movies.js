@@ -39,18 +39,30 @@ MovieListComponent.prototype = {
         }
         let newMovieItem = new MovieItem(movie, this);
         console.log(movie);
-        fetch('marvel/movies/', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify(movie)
-        }).then(json => {
-            this.collection.push(newMovieItem);
-            this.$el.find('ul').append(newMovieItem.render())
-        });
+        const me = this;
+        fetch('marvel/movies', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(movie)
+            })
+            .then(response => {
+                response.json().then(json => {
+                    console.log(json);
+                    const newMovie = new MovieItem(json, me);
+                    me.add(newMovie);
+                })
+            });
     },
+    add: function(movie){
+		console.log(movie.id);
+		this.collection.push(movie);
+		this.$el.find('ul').append(movie.render());
+		console.log(this.$el);
+		return this.collection;
+	},
     createMovie2() {
 
         let movie = {

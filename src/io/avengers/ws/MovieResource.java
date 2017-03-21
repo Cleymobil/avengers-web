@@ -40,19 +40,19 @@ public class MovieResource {
 	}
 
 	@POST
-	public Response createNewMovie(Movie newMovie) throws SQLException {
+	public Movie createNewMovie(Movie newMovie) throws SQLException {
 		System.out.println(newMovie);
 		MovieService service = new MovieService();
 		if (newMovie.getName().isEmpty()) {
-			return Response.status(406).entity("\"empty Movie name\"").build();
+			return null;
 		}
 		System.out.println("--------");
-		if (newMovie.getHistory().isEmpty()){
+		if (newMovie.getHistory()== null){
 		service.createMovie(newMovie);
 		}else {
 			service.createFullMovie(newMovie);
 		}
-		return Response.status(201).entity("\"" + newMovie.getId() + "\"").build();
+		return newMovie;
 	}
 
 	@Path("{movieId}/{heroId}")
