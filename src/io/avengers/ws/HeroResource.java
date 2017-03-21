@@ -33,14 +33,14 @@ public class HeroResource {
 	}
 
 	@POST
-	public Response createHero(Hero hero) {
+	public Hero createHero(Hero hero) {
 		System.out.println(hero);
-		HeroService heroService = new HeroService();
+		
 		if (hero.getName().isEmpty()) {
-			return Response.status(406).entity("\"Empty comment\"").build();
+			return null;
 		}
-		heroService.createHero(hero);
-		return Response.status(201).entity("\"" + heroService.findAll() + "\"").build();
+		
+		return new HeroService().createHero(hero);
 	}
 
 	@DELETE
