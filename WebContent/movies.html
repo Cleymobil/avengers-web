@@ -22,6 +22,20 @@
             <button type="reset">Clear Form</button>
     </form>
     <br/><br/><br/><br/>
+    <form>
+        <h2>Add heroes to a movie</h2>
+        <form method="post" action="traitement.php">
+            <p>
+                <label for="movie">Choose a movie</label><br />
+                <select name="movieList" id="movieList">
+       </select>
+            </p>
+        </form>
+        <fieldset id="checkedHeroList">
+
+        </fieldset>
+        <button type="button" class="addHeroToMovie"> submit</button>
+    </form>
     <!--<form id="form2">
         <h2>Create a new Movie with all its parameters</h2>
         <ul>
@@ -37,12 +51,14 @@
     </div>
 
 
+
 </body>
 <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 <script type="text/javascript" src="js/movies.js"></script>
+<script type="text/javascript" src="js/heroe.js"></script>
 <script type="text/javascript" src="movieApplication.js"></script>
-
+<!--<script type="text/javascript" src="heroApplication.js"></script>-->
 
 
 </html>
