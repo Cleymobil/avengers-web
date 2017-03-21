@@ -31,9 +31,8 @@ MovieListComponent.prototype = {
         return this.$el;
     },
     renderList: function() {
-        const template = `<select name="movieSelectName" class="movieSelect">
-
-       </select>`;
+        const template = `<p><select name="movieSelectName" class="movieSelect">
+       </select><p/>`;
         //cached component jQueryified element
         this.$el = $(template);
         console.log(this.$el);
