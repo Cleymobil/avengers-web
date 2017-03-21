@@ -36,7 +36,7 @@ MovieListComponent.prototype = {
             gross: parseInt($('input[name=gross]').val()),
             budget: parseInt($('input[name=budget]').val()),
         }
-        const newMovieItem = new MovieItem(newMovie, this);
+        const newMovieItem = new MovieItem(movie, this);
         console.log(movie);
         fetch('marvel/movies/', {
             headers: {
@@ -45,11 +45,11 @@ MovieListComponent.prototype = {
             },
             method: "POST",
             body: JSON.stringify(movie)
-        })//.then(json => {
-        	//this.collection.push(newMovieItem);
-        	//this.$el.find('ul').append(newMovieItem.render())
-       // })
-
+        }).then(json => {
+        	this.collection.push(newMovieItem);
+        	this.$el.find('ul').append(newMovieItem.render())
+        })
+;
     }
 }
 
