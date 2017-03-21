@@ -13,6 +13,6 @@ function movieApplication() {
     })
 }
 // after 25ms
-$(document).ready(function() {
+$(window).on("load", function() {
     movieApplication();
 });

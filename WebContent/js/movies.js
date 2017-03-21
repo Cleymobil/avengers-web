@@ -31,17 +31,16 @@ MovieListComponent.prototype = {
         return this.$el;
     },
     renderList: function() {
-        const template = `<div class = component>
-			
-			</div>`;
+        const template = `<select name="movieSelectName" class="movieSelect">
+
+       </select>`;
         //cached component jQueryified element
         this.$el = $(template);
         console.log(this.$el);
         //All is done in Memory
-        this.collection.forEach(movie => this.$el.find('ul').append(movie.renderInList()));
+        this.collection.forEach(movie => this.$el.find('.movieSelect').append(movie.renderInList()));
         //More efficient, if we put in the DOM later
-        $('#movieList').append(this.$el);
-        console.log($('#movieList'));
+        $('#movieSelectId').append(this.$el);
         return this.$el;
     },
     createMovie() {
@@ -120,8 +119,7 @@ MovieItem.prototype = {
         return this.$el;
     },
     renderInList() {
-
-        const template = `<option value=${this.id}>${this.name}</option>`;
+        const template = `<option value="${this.name}">${this.name}</option>`;
         //Element jQueryfied
         this.$el = $(template);
         return this.$el;
