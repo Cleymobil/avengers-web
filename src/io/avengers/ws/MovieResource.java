@@ -47,7 +47,11 @@ public class MovieResource {
 			return Response.status(406).entity("\"empty Movie name\"").build();
 		}
 		System.out.println("--------");
+		if (newMovie.getHistory().isEmpty()){
 		service.createMovie(newMovie);
+		}else {
+			service.createFullMovie(newMovie);
+		}
 		return Response.status(201).entity("\"" + newMovie.getId() + "\"").build();
 	}
 

@@ -1,5 +1,6 @@
 function MovieListComponent() {
     $('button.createMovie').on('click', event => this.createMovie());
+    $('button.createMovie2').on('click', event => this.createMovie2());
 }
 MovieListComponent.prototype = {
     fetchAll: function() {
@@ -31,12 +32,12 @@ MovieListComponent.prototype = {
     },
     createMovie() {
 
-        const movie = {
+        let movie = {
             name: $('input[name=movieName]').val(),
             gross: parseInt($('input[name=gross]').val()),
             budget: parseInt($('input[name=budget]').val()),
         }
-        const newMovieItem = new MovieItem(movie, this);
+        let newMovieItem = new MovieItem(movie, this);
         console.log(movie);
         fetch('marvel/movies/', {
             headers: {
@@ -46,10 +47,31 @@ MovieListComponent.prototype = {
             method: "POST",
             body: JSON.stringify(movie)
         }).then(json => {
-        	this.collection.push(newMovieItem);
-        	this.$el.find('ul').append(newMovieItem.render())
-        })
-;
+            this.collection.push(newMovieItem);
+            this.$el.find('ul').append(newMovieItem.render())
+        });
+    },
+    createMovie2() {
+
+        let movie = {
+            name: $('input[name=movieName2]').val(),
+            gross: parseInt($('input[name=gross2]').val()),
+            budget: parseInt($('input[name=budget2]').val()),
+            history: $('input[name=history2]').val()
+        }
+        let newMovieItem = new MovieItem(movie, this);
+        console.log(movie);
+        fetch('marvel/movies/', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(movie)
+        }).then(json => {
+            this.collection.push(newMovieItem);
+            this.$el.find('ul').append(newMovieItem.render())
+        });
     }
 }
 
