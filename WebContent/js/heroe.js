@@ -62,7 +62,22 @@ HeroListComponent.prototype = {
         this.$el.append(newHero.render());
         console.log(this.$el);
         return this.collection;
-    }
+    },
+    renderCheckedList: function() {
+        const template = `<div class = component>
+			<h3>Hero to add in the movie</h3> 
+				<ul>
+				</ul>
+			</div>`;
+        //cached component jQueryified element
+        this.$el = $(template);
+        console.log(this.$el);
+        //All is done in Memory
+        this.collection.forEach(hero => this.$el.find('ul').append(hero.renderCheck()));
+        //More efficient, if we put in the DOM later
+        $('#checkedHeroList').append(this.$el);
+        return this.$el;
+    },
 }
 
 function HeroItem(data, listComponent) {
@@ -89,5 +104,12 @@ HeroItem.prototype = {
         //new state
         component.collection = component.collection.filter(h => h.id !== this.id);
         this.$el.remove();
+    },
+    renderCheck() {
+        const template = `<li><input class="checkboxHero" type= "checkbox" name = ${this.name}>${this.name}</li>`;
+        //Element jQueryfied
+        this.$el = $(template);
+        const li = $('<li>');
+        return this.$el;
     }
 }

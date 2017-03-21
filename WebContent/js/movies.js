@@ -30,6 +30,20 @@ MovieListComponent.prototype = {
         $('div.movieList').append(this.$el);
         return this.$el;
     },
+    renderList: function() {
+        const template = `<div class = component>
+			
+			</div>`;
+        //cached component jQueryified element
+        this.$el = $(template);
+        console.log(this.$el);
+        //All is done in Memory
+        this.collection.forEach(movie => this.$el.find('ul').append(movie.renderInList()));
+        //More efficient, if we put in the DOM later
+        $('#movieList').append(this.$el);
+        console.log($('#movieList'));
+        return this.$el;
+    },
     createMovie() {
 
         let movie = {
@@ -56,13 +70,13 @@ MovieListComponent.prototype = {
                 })
             });
     },
-    add: function(movie){
-		console.log(movie.id);
-		this.collection.push(movie);
-		this.$el.find('ul').append(movie.render());
-		console.log(this.$el);
-		return this.collection;
-	},
+    add: function(movie) {
+        console.log(movie.id);
+        this.collection.push(movie);
+        this.$el.find('ul').append(movie.render());
+        console.log(this.$el);
+        return this.collection;
+    },
     createMovie2() {
 
         let movie = {
@@ -103,6 +117,13 @@ MovieItem.prototype = {
         const li = $('<li>');
         //Catch the button without reading all DOM with find()
         const button = this.$el.find('button').on('click', event => this.remove());
+        return this.$el;
+    },
+    renderInList() {
+
+        const template = `<option value=${this.id}>${this.name}</option>`;
+        //Element jQueryfied
+        this.$el = $(template);
         return this.$el;
     },
 
