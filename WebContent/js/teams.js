@@ -144,8 +144,9 @@ TeamItem.prototype = {
 		fetch('marvel/teams/' + this.id, { method: 'delete' })
 			.catch(error => application());
 		//new state
-		component.collection = component.collection.filter(team => team.id !== this.id);
-		this.$el.remove()
+		this.collection = this.collection.filter(team => team.id !== this.id);
+		this.$el.remove();
+		this.listComponent.render();
 
 	},
 
