@@ -18,9 +18,9 @@
          return this.$el;
      },
      renderInList() {
-         const template = `<option value="${this.name}">${this.name}</option>`;
+         const template2 = `<option value="${this.name}">${this.name}</option>`;
          //Element jQueryfied
-         this.$el2 = $(template);
+         this.$el2 = $(template2);
          return this.$el2;
      },
 

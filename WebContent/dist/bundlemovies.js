@@ -199,26 +199,26 @@
          return this.$el;
      },
      renderList: function() {
-         const template = `<p><select name="movieSelectName" id="movieSelect">
+         const template2 = `<p><select name="movieSelectName" id="movieSelect">
        </select><p/>`;
          //cached component jQueryified element
-         this.$el = $(template);
-         console.log(this.$el);
+         this.$el2 = $(template2);
+         console.log(this.$el2);
          //All is done in Memory
-         this.collection.forEach(movie => this.$el.find('#movieSelect').append(movie.renderInList()));
+         this.collection.forEach(movie => this.$el2.find('#movieSelect').append(movie.renderInList()));
          //More efficient, if we put in the DOM later
-         $('#movieSelectId').append(this.$el);
-         return this.$el;
+         $('#movieSelectId').append(this.$el2);
+         return this.$el2;
      },
      createMovie() {
 
-         const movie = {
+         const newMovie = {
              name: $('input[name=movieName]').val(),
              gross: parseInt($('input[name=gross]').val()),
              budget: parseInt($('input[name=budget]').val())
          }
-         const newMovieItem = new __WEBPACK_IMPORTED_MODULE_0__movieItem__["a" /* MovieItem */](movie, this);
-         console.log(movie);
+         const newMovieItem = new __WEBPACK_IMPORTED_MODULE_0__movieItem__["a" /* MovieItem */](newMovie, this);
+         console.log(newMovie);
          const me = this;
          fetch('marvel/movies', {
                  headers: {
@@ -226,20 +226,20 @@
                      'Content-Type': 'application/json'
                  },
                  method: "POST",
-                 body: JSON.stringify(movie)
+                 body: JSON.stringify(newMovie)
              })
              .then(response => {
                  response.json().then(json => {
                      console.log(json);
-                     const newMovie = new __WEBPACK_IMPORTED_MODULE_0__movieItem__["a" /* MovieItem */](json, me);
-                     me.add(newMovie);
+                     const constMovie = new __WEBPACK_IMPORTED_MODULE_0__movieItem__["a" /* MovieItem */](json, me);
+                     me.add(constMovie);
                  })
              });
      },
-     add: function(movie) {
-         console.log(movie.id);
-         this.collection.push(movie);
-         this.$el.find('ul').append(movie.render());
+     add: function(newMovie) {
+         console.log(newMovie.id);
+         this.collection.push(newMovie);
+         this.$el.find('ul').append(newMovie.render());
          console.log(this.$el);
          return this.collection;
      },
@@ -387,9 +387,9 @@ $(document).ready(function() {
          return this.$el;
      },
      renderInList() {
-         const template = `<option value="${this.name}">${this.name}</option>`;
+         const template2 = `<option value="${this.name}">${this.name}</option>`;
          //Element jQueryfied
-         this.$el2 = $(template);
+         this.$el2 = $(template2);
          return this.$el2;
      },
 
