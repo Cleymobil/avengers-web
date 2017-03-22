@@ -99,19 +99,8 @@ HeroItem.prototype = {
 
         return this.$el;
     },
-
-<<<<<<< HEAD
-			.then(Response => {
-				$('div.component').remove();
-				const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
-				this.$el = $(template);
-				$('body').append(this.$el);
-				
-=======
     viewHero: function() {
         return $.get('marvel/heroes/' + this.id)
->>>>>>> branch 'master' of https://github.com/Cleymobil/avengers-web.git
-
         .then(Response => {
             $('div.component').remove();
             const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
