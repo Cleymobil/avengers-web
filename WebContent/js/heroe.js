@@ -89,12 +89,12 @@ function HeroItem(data, listComponent) {
 HeroItem.prototype = {
     render() {
 
-        const template = `<li>${this.name}<button>Delete ${this.name}</button><button class="view">View ${this.name}</button></li>`;
+        const template = `<li>${this.name}<button class="delete">Delete ${this.name}</button><button class="view">View ${this.name}</button></li>`;
         //Element jQueryfied
         this.$el = $(template);
         const li = $('<li>');
         //Catch the button without reading all DOM with find()
-        const button = this.$el.find('button').on('click', event => this.remove());
+        const button = this.$el.find('button.delete').on('click', event => this.remove());
         const button2 = this.$el.find('button.view').on('click', event => this.viewHero());
 		
         return this.$el;
@@ -108,7 +108,7 @@ HeroItem.prototype = {
 				const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
 				this.$el = $(template);
 				$('body').append(this.$el);
-				//this.viewHeroes();
+				
 
 			})
 	},
