@@ -58,16 +58,16 @@
              })
      },
      renderList: function() {
-         const template = `<select name="teamSelectName" class="teamSelect">
+         const template2 = `<p><select name="teamSelectName" class="teamSelect">
 
-       </select>`;
+       </select></p>`;
          //cached component jQueryified element
-         this.$el = $(template);
-         console.log(this.$el);
+         this.$el2 = $(template2);
+         console.log(this.$el2);
          //All is done in Memory
-         this.collection.forEach(team => this.$el.find('.teamSelect').append(team.renderInList()));
+         this.collection.forEach(team => this.$el2.find('.teamSelect').append(team.renderInList()));
          //More efficient, if we put in the DOM later
-         $('#teamSelectId').append(this.$el);
-         return this.$el;
+         $('#teamSelectId').append(this.$el2);
+         return this.$el2;
      }
  }

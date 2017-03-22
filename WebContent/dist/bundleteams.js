@@ -224,17 +224,17 @@
              })
      },
      renderList: function() {
-         const template = `<select name="teamSelectName" class="teamSelect">
+         const template2 = `<p><select name="teamSelectName" class="teamSelect">
 
-       </select>`;
+       </select></p>`;
          //cached component jQueryified element
-         this.$el = $(template);
-         console.log(this.$el);
+         this.$el2 = $(template2);
+         console.log(this.$el2);
          //All is done in Memory
-         this.collection.forEach(team => this.$el.find('.teamSelect').append(team.renderInList()));
+         this.collection.forEach(team => this.$el2.find('.teamSelect').append(team.renderInList()));
          //More efficient, if we put in the DOM later
-         $('#teamSelectId').append(this.$el);
-         return this.$el;
+         $('#teamSelectId').append(this.$el2);
+         return this.$el2;
      }
  }
 
@@ -271,8 +271,8 @@ HeroItem.prototype = {
             .then(Response => {
                 $('div.component').remove();
                 const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
-                this.$el = $(template);
-                $('body').append(this.$el);
+                this.$el2 = $(template);
+                $('body').append(this.$el2);
                 //this.viewHeroes();
 
             })
@@ -284,7 +284,7 @@ HeroItem.prototype = {
             })
             .catch(error => heroApplication());
         //new state
-        component.collection = component.collection.filter(h => h.id !== this.id);
+        this.collection = this.collection.filter(h => h.id !== this.id);
         this.$el.remove();
     },
     renderCheck() {
@@ -310,17 +310,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 let component;
 
 function application() {
-    component = new __WEBPACK_IMPORTED_MODULE_0__teams_teamListComponent__["a" /* TeamListComponent */]();
+	component = new __WEBPACK_IMPORTED_MODULE_0__teams_teamListComponent__["a" /* TeamListComponent */]();
 
-    component.fetchAll().then(function(teams) {
-        component.render();
-        component.renderList();
-    })
-    let heroListComponent = new __WEBPACK_IMPORTED_MODULE_1__heroes_heroListComponent__["a" /* HeroListComponent */]();
-    heroListComponent.fetchAll().then(function(heroes) {
-        heroListComponent.renderCheckedList(heroes);
-    });
+	component.fetchAll().then(function (teams) {
+		component.render();
+		component.renderList();
+	})
+	let heroListComponent = new __WEBPACK_IMPORTED_MODULE_1__heroes_heroListComponent__["a" /* HeroListComponent */]();
+	heroListComponent.fetchAll().then(function (heroes) {
+		heroListComponent.renderCheckedList(heroes);
+	});
+
 }
+
+
 
 application();
 
