@@ -46,12 +46,12 @@
      },
      createMovie() {
 
-         let movie = {
+         const movie = {
              name: $('input[name=movieName]').val(),
              gross: parseInt($('input[name=gross]').val()),
              budget: parseInt($('input[name=budget]').val()),
          }
-         let newMovieItem = new MovieItem(movie, this);
+         const newMovieItem = new MovieItem(movie, this);
          console.log(movie);
          const me = this;
          fetch('marvel/movies', {

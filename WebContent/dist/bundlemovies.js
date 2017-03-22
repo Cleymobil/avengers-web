@@ -212,12 +212,12 @@
      },
      createMovie() {
 
-         let movie = {
+         const movie = {
              name: $('input[name=movieName]').val(),
              gross: parseInt($('input[name=gross]').val()),
              budget: parseInt($('input[name=budget]').val()),
          }
-         let newMovieItem = new __WEBPACK_IMPORTED_MODULE_0__movieItem__["a" /* MovieItem */](movie, this);
+         const newMovieItem = new __WEBPACK_IMPORTED_MODULE_0__movieItem__["a" /* MovieItem */](movie, this);
          console.log(movie);
          const me = this;
          fetch('marvel/movies', {
@@ -300,8 +300,8 @@ HeroItem.prototype = {
             .then(Response => {
                 $('div.component').remove();
                 const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
-                this.$el = $(template);
-                $('body').append(this.$el);
+                this.$el2 = $(template);
+                $('body').append(this.$el2);
                 //this.viewHeroes();
 
             })
@@ -313,7 +313,7 @@ HeroItem.prototype = {
             })
             .catch(error => heroApplication());
         //new state
-        component.collection = component.collection.filter(h => h.id !== this.id);
+        this.collection = this.collection.filter(h => h.id !== this.id);
         this.$el.remove();
     },
     renderCheck() {
@@ -384,15 +384,15 @@ $(window).on("load", function() {
      renderInList() {
          const template = `<option value="${this.name}">${this.name}</option>`;
          //Element jQueryfied
-         this.$el = $(template);
-         return this.$el;
+         this.$el2 = $(template);
+         return this.$el2;
      },
 
      remove() {
          fetch('marvel/movies/' + this.id, { method: 'delete' })
              .catch(error => movieApplication());
          //new state
-         component.collection = component.collection.filter(h => h.id !== this.id);
+         this.collection = this.collection.filter(m => m.id !== this.id);
          this.$el.remove();
      },
      addHeroInMovie() {
