@@ -215,7 +215,7 @@
          const movie = {
              name: $('input[name=movieName]').val(),
              gross: parseInt($('input[name=gross]').val()),
-             budget: parseInt($('input[name=budget]').val()),
+             budget: parseInt($('input[name=budget]').val())
          }
          const newMovieItem = new __WEBPACK_IMPORTED_MODULE_0__movieItem__["a" /* MovieItem */](movie, this);
          console.log(movie);
@@ -351,7 +351,12 @@ function movieApplication() {
     })
 }
 // after 25ms
+/*
 $(window).on("load", function() {
+    movieApplication();
+});
+*/
+$(document).ready(function() {
     movieApplication();
 });
 
@@ -373,7 +378,7 @@ $(window).on("load", function() {
  MovieItem.prototype = {
      render() {
 
-         const template = `<li>${this.name}<button>Delete ${this.name}</button></li>`;
+         const template = `<li>${this.name}&nbsp&nbsp<button>Delete ${this.name}</button></li>`;
          //Element jQueryfied
          this.$el = $(template);
          const li = $('<li>');

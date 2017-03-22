@@ -9,7 +9,7 @@
  MovieItem.prototype = {
      render() {
 
-         const template = `<li>${this.name}<button>Delete ${this.name}</button></li>`;
+         const template = `<li>${this.name}&nbsp&nbsp<button>Delete ${this.name}</button></li>`;
          //Element jQueryfied
          this.$el = $(template);
          const li = $('<li>');

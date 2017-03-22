@@ -49,7 +49,7 @@
          const movie = {
              name: $('input[name=movieName]').val(),
              gross: parseInt($('input[name=gross]').val()),
-             budget: parseInt($('input[name=budget]').val()),
+             budget: parseInt($('input[name=budget]').val())
          }
          const newMovieItem = new MovieItem(movie, this);
          console.log(movie);
