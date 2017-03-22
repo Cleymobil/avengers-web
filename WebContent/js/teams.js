@@ -6,6 +6,10 @@ function application() {
 	component.fetchAll().then(function (teams) {
 		component.render();
 		component.renderList();
+	})
+	heroListComponent = new HeroListComponent();
+	heroListComponent.fetchAll().then(function (heroes) {
+		heroListComponent.renderCheckedList(heroes);
 	});
 
 }
@@ -86,19 +90,19 @@ TeamListComponent.prototype = {
 
 
 	},
-	 renderList: function() {
-        const template = `<select name="teamSelectName" class="teamSelect">
+	renderList: function () {
+		const template = `<select name="teamSelectName" class="teamSelect">
 
        </select>`;
-        //cached component jQueryified element
-        this.$el = $(template);
-        console.log(this.$el);
-        //All is done in Memory
-        this.collection.forEach(team => this.$el.find('.teamSelect').append(team.renderInList()));
-        //More efficient, if we put in the DOM later
-        $('#teamSelectId').append(this.$el);
-        return this.$el;
-    }
+		//cached component jQueryified element
+		this.$el = $(template);
+		console.log(this.$el);
+		//All is done in Memory
+		this.collection.forEach(team => this.$el.find('.teamSelect').append(team.renderInList()));
+		//More efficient, if we put in the DOM later
+		$('#teamSelectId').append(this.$el);
+		return this.$el;
+	}
 
 
 }
@@ -124,11 +128,11 @@ TeamItem.prototype = {
 
 	},
 
-	renderInList:function() {
-        const template = `<option value="${this.name}">${this.name}</option>`;
-        //Element jQueryfied
-        this.$el = $(template);
-        return this.$el;
+	renderInList: function () {
+		const template = `<option value="${this.name}">${this.name}</option>`;
+		//Element jQueryfied
+		this.$el = $(template);
+		return this.$el;
 	},
 
 	remove: function () {
