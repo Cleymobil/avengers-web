@@ -89,7 +89,7 @@ function HeroItem(data, listComponent) {
 HeroItem.prototype = {
     render() {
 
-        const template = `<li>${this.name}<button class="delete">Delete ${this.name}</button><button class="view">View ${this.name}</button></li>`;
+        const template = `<li>${this.name}&nbsp&nbsp<button class="delete">Delete ${this.name}</button>&nbsp&nbsp&nbsp&nbsp<button class="view">View ${this.name}</button></li>`;
         //Element jQueryfied
         this.$el = $(template);
         const li = $('<li>');
