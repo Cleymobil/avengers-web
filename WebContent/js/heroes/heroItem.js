@@ -24,8 +24,8 @@ HeroItem.prototype = {
             .then(Response => {
                 $('div.component').remove();
                 const template = `<div class="component"><h1>${this.name}</h1> <ul><li>Name:${this.name}</li><li>Id:${this.id}</li><li>Likes:${this.likes}</li></ul><h1></h1></div>`;
-                this.$el = $(template);
-                $('body').append(this.$el);
+                this.$el2 = $(template);
+                $('body').append(this.$el2);
                 //this.viewHeroes();
 
             })
@@ -37,7 +37,7 @@ HeroItem.prototype = {
             })
             .catch(error => heroApplication());
         //new state
-        component.collection = component.collection.filter(h => h.id !== this.id);
+        this.collection = this.collection.filter(h => h.id !== this.id);
         this.$el.remove();
     },
     renderCheck() {
