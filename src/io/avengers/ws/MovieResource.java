@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -54,22 +55,22 @@ public class MovieResource {
 		}
 		return newMovie;
 	}
-
-	@Path("{movieId}/{heroId}")
-	@POST
-	public Response addHeroToMovie(@PathParam("movieId") int movieId, @PathParam("heroId") int heroId) {
-		System.out.println("movie id is: " + movieId + " and hero id is: " + heroId);
+	
+	@PUT
+	public Response addHeroToMovie(@PathParam("movieName") String movieName, @PathParam("heroId") int heroId) {
+		System.out.println("movie name is: " + movieName + " and hero id is: " + heroId);
 		HeroService heroService = new HeroService();
 		MovieService movieService = new MovieService();
-		if (movieId <= 0 || heroId <= 0) {
+		if (movieName.isEmpty() || heroId <= 0) {
 			return Response.status(406).entity("\"empty id\"").build();
 		}
 		String heroName = heroService.findHeroesById(heroId).getName();
-		String movieName = movieService.findMovieById(movieId).getName();
+		int movieId = movieService.findMoviesByName(movieName).iterator().next().getId();
+		
 		movieService.putHeroInMovie(heroId, movieId);
 		return Response.status(201).entity("\"" + heroName + " " + movieName + "\"").build();
 	}
-
+	
 	@Path("{movieId}")
 	@DELETE
 	public Response deleteMovie(@PathParam("movieId") int movieId) {
@@ -103,5 +104,8 @@ public class MovieResource {
 		movieService.deleteHeroInMovie(movieId, heroId);
 		return Response.status(204).header("X-deleted","\"" + heroName + " has been deleted from " +movieName+ "\"").build();
 	}
+	
+	
+	
 
 }
