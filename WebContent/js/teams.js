@@ -1,7 +1,10 @@
+import { TeamListComponent } from "./teams/teamListComponent";
+import { HeroListComponent } from "./heroes/heroListComponent";
 
+let component;
 
 function application() {
-	component = new TeamListComponent();
+    component = new TeamListComponent();
 
 	component.fetchAll().then(function (teams) {
 		component.render();
