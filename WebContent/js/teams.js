@@ -91,14 +91,17 @@ TeamListComponent.prototype = {
 
 	},
 	renderList: function () {
-		const template = `<select name="teamSelectName" class="teamSelect">
+		const template = `<select name="teamSelectName" id="teamSelect">
 
        </select>`;
 		//cached component jQueryified element
 		this.$el = $(template);
 		console.log(this.$el);
 		//All is done in Memory
-		this.collection.forEach(team => this.$el.find('.teamSelect').append(team.renderInList()));
+		this.collection.forEach(team => {this.$el.find('#teamSelect').append(team.renderInList())
+		this.$el.find('#teamSelect').append(team.name);
+	
+});
 		//More efficient, if we put in the DOM later
 		$('#teamSelectId').append(this.$el);
 		return this.$el;
@@ -129,6 +132,7 @@ TeamItem.prototype = {
 	},
 
 	renderInList: function () {
+		
 		const template = `<option value="${this.name}">${this.name}</option>`;
 		//Element jQueryfied
 		this.$el = $(template);
