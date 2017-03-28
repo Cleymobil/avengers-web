@@ -5,8 +5,6 @@
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-
-
 	<dependencies>
 
 		<dependency>
@@ -15,11 +13,12 @@
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.avengers</groupId>
 			<artifactId>avengers-db</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+
 		</dependency>
 
 	</dependencies>
@@ -35,8 +34,6 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-
-
 		</plugins>
 
 	</build>
