@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Marvel Heroes</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <header>
+
+        <!-- 		<center><img src="../marvelheroes.png" alt="all Marvel" /></center> -->
+    </header>
+    <h1>Heroes</h1>
+    <p><a href="http://localhost:8080/avengers-web/movies.html">Movies</a></p>
+    <p><a href="http://localhost:8080/avengers-web/teams.html">Teams</a></p>
+
+
+    <h2>Creer un heroe</h2>
+
+    <form>
+
+        <label>Hero name :
+			<input type="text" placeholder="Hero Name" name="name" required="required">
+			</label> Likes <input type="number" placeholder="Likes" name="likes" required="required"><br/> Dislikes <input type="number" placeholder="Dislikes" name="dislikes"><br/>
+
+        <fieldset>
+            <legend>
+                Liens sociaux
+            </legend>
+            <label>Team : 
+				<select name="team">
+					<option selected="selected" value="false">None</option>
+					<option value="1">Avengers</option>
+					<option value="2">X-men</option>
+
+				</select>
+				</label>
+            <br/>
+        </fieldset>
+
+        <button type="reset">Reset Form</button>
+        <button type="button" class="create">Create new Hero</button>
+
+
+    </form>
+    <div class="heroList">
+    </div>
+</body>
+<footer>Information toke from <a href="http://marvel.com/comics">Marvel</a></footer>
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+<script type="text/javascript" src="dist/bundleheroes.js"></script>
+
+
+</html>
